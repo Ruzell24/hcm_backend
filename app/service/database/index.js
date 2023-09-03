@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-const sequelize = new Sequelize('hmc_db', 'root', 'password', {
+const sequelize = new Sequelize('hcm', 'root', 'password', {
     host: 'mysql_container',
     dialect: 'mysql'
 });
