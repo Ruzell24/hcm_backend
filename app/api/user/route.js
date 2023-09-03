@@ -56,21 +56,27 @@ router.post('/login', controller.userLogin);
  *             properties:
  *               email:
  *                 type: string
+ *               firstName:  # Corrected case for firstName
+ *                 type: string
+ *               lastName:   # Corrected case for lastName
+ *                 type: string
+ *               username:
+ *                 type: string
  *               password:
  *                 type: string
  *             required:
  *               - username
  *               - email
  *               - password
+ *               - lastName
+ *               - firstName  # Corrected case for firstName
  *     responses:
  *       200:
  *         description: Successful login
  *       401:
  *         description: Unauthorized
  */
-
 router.post('/sign-in', controller.userSignIn);
-
 
 
 export default {
