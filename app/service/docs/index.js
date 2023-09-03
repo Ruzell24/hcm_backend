@@ -4,15 +4,24 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDefinition = {
     openapi: '3.0.0',
     info: {
-        title: 'Express API with Swagger',
+        title: 'Your API',
         version: '1.0.0',
-        description: 'API documentation for My Hcm app',
+    },
+    components: {
+        securitySchemes: {
+            bearerAuth: {
+                type: 'http',
+                scheme: 'Bearer',
+                bearerFormat: 'JWT',
+            },
+        },
     },
 };
 
 const options = {
     swaggerDefinition,
-    apis: ['./app/api/**/*.js'], // Path to your route files
+    apis: ['./app/api/**/*.js'], // Path to your route files,
+
 };
 
 

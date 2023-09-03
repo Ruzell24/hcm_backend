@@ -1,12 +1,15 @@
 import express from 'express';
-import connectToDatabase from './service/database';
+import bodyParser from 'body-parser';
+import database from '@service/database';
 import userRouter from '@api/user/route.js';
-import swagger from './service/docs/index';
+import swagger from '@service/docs/index';
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-connectToDatabase();
+database.connectToDatabase();
 
 app.use('/api-docs', swagger.swaggerUi.serve, swagger.swaggerUi.setup(swagger.swaggerSpec));
 app.use('/api/user', userRouter.router)
