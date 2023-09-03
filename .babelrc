@@ -5,7 +5,8 @@
             "root": ["./app"],
             "alias": {
                 "@app": "./app",
-                "@api": "./app/api"
+                "@api": "./app/api",
+                "@service": "./app/service"
             }
         }]
     ]
