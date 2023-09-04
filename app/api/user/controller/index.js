@@ -72,7 +72,19 @@ const userSignUp = async (req, res) => {
     }
 };
 
+const getUserDetails = (req, res) => {
+    const token = req.headers.authorization?.split(' ')[1];
+    try {
+        const user = jwt.authenticateToken(token)
+
+        res.json({ user })
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+}
+
 export default {
     userLogin,
-    userSignUp
+    userSignUp,
+    getUserDetails
 }
