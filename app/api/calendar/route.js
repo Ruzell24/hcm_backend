@@ -28,10 +28,9 @@ const router = express.Router();
  *               user_id:
  *                 type: integer
  *                 description: The ID of the user associated with the time entry.
- *               start_time:
+ *               title:
  *                 type: string
- *                 format: date-time
- *                 description: The start date and time of the time entry (ISO 8601 format).
+ *                 description: Title of what ur doing on that time
  *             required:
  *               - user_id
  *               - start_time
@@ -67,19 +66,6 @@ router.post('/time-in', middleware, controller.createTimeEntry);
  *         description: The ID of the time entry to update.
  *         schema:
  *           type: string
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               end_time:
- *                 type: string
- *                 format: date-time
- *                 description: The new end date and time of the time entry (ISO 8601 format).
- *             required:
- *               - end_time
  *     responses:
  *       200:
  *         description: Time entry updated successfully

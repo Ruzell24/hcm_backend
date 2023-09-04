@@ -1,19 +1,24 @@
 import TimeEntry from '../model/index';
+import moment from 'moment'
 
 
 const createTimeEntry = async (req, res) => {
     try {
-        const { user_id, start_time } = req.body;
+        const { user_id, title } = req.body;
+        const currentTime = moment().format('YYYY-MM-DD HH:mm:ss');
 
         const timeEntry = await TimeEntry.create({
             user_id: user_id,
-            start_time: start_time,
-            end_time: start_time,
+            start_time: currentTime,
+            end_time: currentTime,
+            title: title,
             duration: 0,
+            is_ongoing: 1
         });
 
         return res.status(201).json({ timeEntry });
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error });
     }
 };
@@ -21,7 +26,6 @@ const createTimeEntry = async (req, res) => {
 const timeOut = async (req, res) => {
     try {
         const { id } = req.params;
-        const { end_time } = req.body;
 
         const timeEntry = await TimeEntry.findByPk(id);
 
@@ -29,15 +33,15 @@ const timeOut = async (req, res) => {
             return res.status(404).json({ error: 'Time entry not found' });
         }
 
-
+        const endTime = moment().format('YYYY-MM-DD HH:mm:ss');
         const startTime = new Date(timeEntry.start_time);
-        const endTime = new Date(end_time);
         const duration = Math.floor((new Date(endTime) - new Date(startTime)) / 1000 / 60);
 
 
         await timeEntry.update({
             end_time: endTime,
             duration: duration,
+            is_ongoing: 0
         });
 
         return res.status(200).json({ timeEntry });
