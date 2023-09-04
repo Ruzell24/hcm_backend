@@ -42,7 +42,7 @@ const userLogin = async (req, res) => {
 }
 
 
-const userSignIn = async (req, res) => {
+const userSignUp = async (req, res) => {
     const body = req.body;
 
 
@@ -74,5 +74,5 @@ const userSignIn = async (req, res) => {
 
 export default {
     userLogin,
-    userSignIn
+    userSignUp
 }
