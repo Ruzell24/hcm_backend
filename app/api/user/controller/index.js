@@ -1,16 +1,46 @@
 import UserModel from '../model/index';
 import utils from '@service/utils/security';
+import jwt from '@service/authenticator/jwt';
 
 
-const userLogin = (req, res) => {
-    res.send('User login')
 
+const userLogin = async (req, res) => {
+    const body = req.body;
+
+    try {
+        const user = await UserModel.findOne({ where: { email: body.email } });
+
+        if (!user) {
+
+            return res.status(404).json({ error: 'User not found' });
+        }
+        const passwordMatches = await utils.decrypt_password(body.password, user.password);
+
+        if (!passwordMatches) {
+            return res.status(401).json({ error: 'Authentication failed' });
+        }
+
+        const token = jwt.generateToken(user);
+
+        res.status(200).json({
+            user: {
+                username: user.username,
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                token: token
+            }
+        });
+    } catch (error) {
+        console.error("Error during login:", error.message);
+        res.status(500).json({ error: 'Login failed', message: error.message });
+    }
 }
+
 
 const userSignIn = async (req, res) => {
     const body = req.body;
     const password = await utils.encrypt_password(body.password)
-    console.log(body)
     try {
         // Attempt to create a new user
         const user = await UserModel.create({

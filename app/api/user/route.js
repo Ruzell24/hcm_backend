@@ -1,6 +1,7 @@
 import express from 'express';
 import controller from './controller/index';
 
+
 const router = express.Router();
 
 /**
@@ -56,9 +57,9 @@ router.post('/login', controller.userLogin);
  *             properties:
  *               email:
  *                 type: string
- *               firstName:  # Corrected case for firstName
+ *               first_name:
  *                 type: string
- *               lastName:   # Corrected case for lastName
+ *               last_name:  
  *                 type: string
  *               username:
  *                 type: string
@@ -68,8 +69,8 @@ router.post('/login', controller.userLogin);
  *               - username
  *               - email
  *               - password
- *               - lastName
- *               - firstName  # Corrected case for firstName
+ *               - last_name
+ *               - first_name  # Corrected case for firstName
  *     responses:
  *       200:
  *         description: Successful login

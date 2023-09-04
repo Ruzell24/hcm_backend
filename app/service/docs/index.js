@@ -11,11 +11,19 @@ const swaggerDefinition = {
         securitySchemes: {
             bearerAuth: {
                 type: 'http',
-                scheme: 'Bearer',
+                in: 'header',
+                name: 'Authorization',
+                description: 'Bearer token to access these api endpoints',
+                scheme: 'bearer',
                 bearerFormat: 'JWT',
             },
         },
     },
+    security: [
+        {
+            bearerAuth: [],
+        },
+    ],
 };
 
 const options = {
