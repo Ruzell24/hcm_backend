@@ -6,6 +6,7 @@ const User = database.sequelize.define('users', {
         type: DataTypes.INTEGER,
         primaryKey: true,        // Make id the primary key
         autoIncrement: true,
+
         // Enable auto-increment
     },
     username: {
@@ -39,6 +40,7 @@ const User = database.sequelize.define('users', {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         validate: {
             notEmpty: {
                 msg: "email cannot be empty."

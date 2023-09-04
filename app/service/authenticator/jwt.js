@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import config from '@api/config';
+import config from 'config';
 
 const generateToken = (userDetails) => {
     try {

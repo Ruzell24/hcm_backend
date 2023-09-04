@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import config from "@api/config/index";
+import config from "config/index";
 
 const sequelize = new Sequelize('hcm', config.MYSQL_USERNAME, config.MYSQL_PASSWORD, {
     host: 'mysql_container',

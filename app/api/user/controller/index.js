@@ -41,7 +41,14 @@ const userLogin = async (req, res) => {
 const userSignIn = async (req, res) => {
     const body = req.body;
     const password = await utils.encrypt_password(body.password)
+
     try {
+        const isUserExist = await UserModel.findOne({ where: { email: body.email } });
+
+        if (isUserExist) {
+            res.status(400).json({ message: 'User email already exist' });
+            return;
+        }
         // Attempt to create a new user
         const user = await UserModel.create({
             username: body.username,
