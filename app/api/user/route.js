@@ -1,5 +1,6 @@
 import express from 'express';
 import controller from './controller/index';
+import middleware from 'service/middleware';
 
 
 const router = express.Router();
@@ -79,6 +80,25 @@ router.post('/login', controller.userLogin);
  */
 router.post('/sign-up', controller.userSignUp);
 
+
+/**
+ * @swagger
+ * /api/user:
+ *   get:
+ *     summary: Get user details
+ *     description: Retrieves user details using a Bearer token from the request header.
+ *     tags:
+ *       - User
+ *     responses:
+ *       200:
+ *         description: Successful operation
+ *       401:
+ *         description: Unauthorized - Invalid or missing token
+ *       400:
+ *         description: Bad request - Token verification failed or other errors
+ */
+
+router.get('/', middleware, controller.getUserDetails)
 
 export default {
     router
