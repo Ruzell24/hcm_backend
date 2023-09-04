@@ -29,12 +29,12 @@ const timeOut = async (req, res) => {
             return res.status(404).json({ error: 'Time entry not found' });
         }
 
-        // Calculate the duration in seconds
+
         const startTime = new Date(timeEntry.start_time);
         const endTime = new Date(end_time);
         const duration = Math.floor((new Date(endTime) - new Date(startTime)) / 1000 / 60);
 
-        // Update the time entry
+
         await timeEntry.update({
             end_time: endTime,
             duration: duration,
@@ -48,8 +48,7 @@ const timeOut = async (req, res) => {
 };
 
 const getAllUserTimeEntries = async (req, res) => {
-    const { id } = req.params; // Assuming you pass the user_id as a parameter
-    console.log(id)
+    const { id } = req.params;
     try {
         const timeEntries = await TimeEntry.findAll({
             where: { user_id: id },
