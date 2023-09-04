@@ -46,7 +46,7 @@ const User = database.sequelize.define('users', {
                 msg: "email cannot be empty."
             },
         }
-        // allowNull defaults to true
+
     },
     password: {
         type: DataTypes.STRING,
@@ -56,7 +56,7 @@ const User = database.sequelize.define('users', {
                 msg: "password cannot be empty."
             },
         }
-        // allowNull defaults to true
+
     },
 })
 
