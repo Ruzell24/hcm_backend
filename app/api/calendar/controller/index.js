@@ -20,7 +20,7 @@ const createTimeEntry = async (req, res) => {
 
 const timeOut = async (req, res) => {
     try {
-        const { id } = req.params; // Assuming you have a route parameter for the time entry ID
+        const { id } = req.params;
         const { end_time } = req.body;
 
         const timeEntry = await TimeEntry.findByPk(id);
