@@ -47,10 +47,26 @@ const timeOut = async (req, res) => {
     }
 };
 
+const getAllUserTimeEntries = async (req, res) => {
+    const { id } = req.params; // Assuming you pass the user_id as a parameter
+    console.log(id)
+    try {
+        const timeEntries = await TimeEntry.findAll({
+            where: { user_id: id },
+        });
+
+        return res.status(200).json({ timeEntries });
+    } catch (error) {
+        console.error('Error fetching user time entries:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 
 export default {
     createTimeEntry,
-    timeOut
+    timeOut,
+    getAllUserTimeEntries
 }
 
 
