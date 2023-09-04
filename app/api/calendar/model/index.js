@@ -23,6 +23,14 @@ const TimeEntry = database.sequelize.define('time_entries', {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
+    title: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    is_ongoing: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false
+    }
 
 });
 
