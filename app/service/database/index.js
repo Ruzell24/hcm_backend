@@ -1,9 +1,7 @@
 import { Sequelize } from "sequelize";
-import dotenv from 'dotenv'
+import config from "config/index";
 
-dotenv.config()
-
-const sequelize = new Sequelize('hcm', 'root', 'password', {
+const sequelize = new Sequelize('hcm', config.MYSQL_USERNAME, config.MYSQL_PASSWORD, {
     host: 'mysql_container',
     dialect: 'mysql'
 });

@@ -14,8 +14,8 @@ const encrypt_password = async (plainTextPassword) => {
 
 const decrypt_password = async (plainTextPassword, hashPassword) => {
     try {
-        const passwordMatches = await bcrypt.compare(plainTextPassword, hashPassword);
-        return passwordMatches;
+        const isPasswordMatch = await bcrypt.compare(plainTextPassword, hashPassword);
+        return isPasswordMatch;
     } catch (error) {
         // Handle error, e.g., log it or throw a custom error
         throw new Error('Password decryption failed');
