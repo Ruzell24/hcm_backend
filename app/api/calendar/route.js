@@ -99,6 +99,35 @@ router.post('/time-in', middleware, controller.createTimeEntry);
 router.patch('/time-out/:id', middleware, controller.timeOut);
 
 
+/**
+ * @swagger
+ * /api/calendar/user/{id}:
+ *   get:
+ *     summary: Get all time entries for a specific user
+ *     description: Retrieve all time entries associated with a specific user.
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the user for whom to retrieve time entries.
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Successful retrieval of user time entries
+ *       401:
+ *         description: Unauthorized
+ *       500:
+ *         description: Internal Server Error
+ *     security:
+ *       - bearerAuth: []  # Specify that this route requires the Bearer token
+ */
+router.get('/user/:id', middleware, controller.getAllUserTimeEntries);
+
+
+
 
 
 export default { router }
