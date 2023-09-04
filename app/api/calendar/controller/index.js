@@ -10,7 +10,6 @@ const createTimeEntry = async (req, res) => {
         const timeEntry = await TimeEntry.create({
             user_id: user_id,
             start_time: currentTime,
-            end_time: currentTime,
             title: title,
             duration: 0,
             is_ongoing: 1
@@ -65,11 +64,28 @@ const getAllUserTimeEntries = async (req, res) => {
     }
 };
 
+const getTimeEntriesOngoing = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const timeEntry = await TimeEntry.findOne({
+            where: { user_id: id, is_ongoing: 1 },
+        });
+
+
+        return res.status(200).json({ timeEntry });
+    } catch (error) {
+        console.error('Error updating user time entries:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
+    }
+};
+
 
 export default {
     createTimeEntry,
     timeOut,
-    getAllUserTimeEntries
+    getAllUserTimeEntries,
+    getTimeEntriesOngoing
 }
 
 

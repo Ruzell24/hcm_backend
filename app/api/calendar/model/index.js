@@ -17,7 +17,7 @@ const TimeEntry = database.sequelize.define('time_entries', {
     },
     end_time: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
     },
     duration: {
         type: DataTypes.INTEGER,

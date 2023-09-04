@@ -92,7 +92,7 @@ router.patch('/time-out/:id', middleware, controller.timeOut);
  *     summary: Get all time entries for a specific user
  *     description: Retrieve all time entries associated with a specific user.
  *     tags:
- *       - User
+ *       - Calendar
  *     parameters:
  *       - in: path
  *         name: id
@@ -111,6 +111,36 @@ router.patch('/time-out/:id', middleware, controller.timeOut);
  *       - bearerAuth: []  # Specify that this route requires the Bearer token
  */
 router.get('/user/:id', middleware, controller.getAllUserTimeEntries);
+
+
+
+
+/**
+ * @swagger
+ * /api/calendar/ongoing/{id}:
+ *   get:
+ *     summary: Get ongoing time entries for a user
+ *     description: Retrieve a list of ongoing time entries for a specific user.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the user for whom to retrieve ongoing time entries.
+ *         schema:
+ *           type: integer
+ *     tags:
+ *       - Calendar
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: A list of ongoing time entries for the specified user.
+ *       500:
+ *         description: Internal server error.
+ */
+
+router.get('/ongoing/:id', middleware, controller.getTimeEntriesOngoing);
+
 
 
 
