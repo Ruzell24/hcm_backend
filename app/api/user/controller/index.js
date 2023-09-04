@@ -8,6 +8,10 @@ const userLogin = async (req, res) => {
     const body = req.body;
 
     try {
+        if (!body.email || !body.password) {
+            return res.status(401).json({ error: 'Missing fields are required' });
+        }
+
         const user = await UserModel.findOne({ where: { email: body.email } });
 
         if (!user) {
@@ -17,13 +21,14 @@ const userLogin = async (req, res) => {
         const passwordMatches = await utils.decrypt_password(body.password, user.password);
 
         if (!passwordMatches) {
-            return res.status(401).json({ error: 'Authentication failed' });
+            return res.status(401).json({ error: 'Incorrect email or password.' });
         }
 
         const token = jwt.generateToken(user);
 
         res.status(200).json({
             user: {
+                id: user.id,
                 username: user.username,
                 first_name: user.first_name,
                 last_name: user.last_name,
@@ -32,7 +37,6 @@ const userLogin = async (req, res) => {
             }
         });
     } catch (error) {
-        console.error("Error during login:", error.message);
         res.status(500).json({ error: 'Login failed', message: error.message });
     }
 }
@@ -40,9 +44,13 @@ const userLogin = async (req, res) => {
 
 const userSignIn = async (req, res) => {
     const body = req.body;
-    const password = await utils.encrypt_password(body.password)
+
 
     try {
+        if (!body.email || !body.password || !body.username || !body.first_name || !body.last_name) {
+            return res.status(401).json({ error: 'Missing fields are required' });
+        }
+        const password = await utils.encrypt_password(body.password)
         const isUserExist = await UserModel.findOne({ where: { email: body.email } });
 
         if (isUserExist) {
@@ -60,7 +68,6 @@ const userSignIn = async (req, res) => {
 
         res.status(201).json({ message: 'User created successfully', user });
     } catch (error) {
-        console.error("Error creating user:", error.message);
         res.status(400).json({ error: 'User creation failed', message: error.message });
     }
 };

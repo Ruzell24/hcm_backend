@@ -7,14 +7,14 @@ const router = express.Router();
 /**
  * @swagger
  * tags:
- *   - name: User
- *     description: User-related operations
+ *   - name: Authentication
+ *     description: Authentication operations
  * /api/user/login:
  *   post:
  *     summary: Login to the system
  *     description: User login route
  *     tags:
- *       - User
+ *       - Authentication
  *     requestBody:
  *       required: true
  *       content:

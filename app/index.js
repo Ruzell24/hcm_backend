@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import database from '@service/database';
 import userRouter from '@api/user/route.js';
+import timeRouter from '@api/calendar/route.js';
 import swagger from '@service/docs/index';
 
 const app = express();
@@ -13,6 +14,7 @@ database.connectToDatabase();
 
 app.use('/api-docs', swagger.swaggerUi.serve, swagger.swaggerUi.setup(swagger.swaggerSpec));
 app.use('/api/user', userRouter.router)
+app.use('/api/calendar', timeRouter.router)
 
 app.get('/', (req, res) => {
     res.send('Hello Worlssssssd')
