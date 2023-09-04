@@ -42,7 +42,7 @@ router.post('/login', controller.userLogin);
  * tags:
  *   - name: User
  *     description: User-related operations
- * /api/user/sign-in:
+ * /api/user/sign-up:
  *   post:
  *     summary: Login to the system
  *     description: User login route
@@ -77,7 +77,7 @@ router.post('/login', controller.userLogin);
  *       401:
  *         description: Unauthorized
  */
-router.post('/sign-in', controller.userSignIn);
+router.post('/sign-up', controller.userSignUp);
 
 
 export default {

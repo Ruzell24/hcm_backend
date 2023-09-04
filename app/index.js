@@ -16,7 +16,7 @@ app.use('/api-docs', swagger.swaggerUi.serve, swagger.swaggerUi.setup(swagger.sw
 app.use('/api/user', userRouter.router)
 app.use('/api/calendar', timeRouter.router)
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send('Hello Worlssssssd')
 })
 
