@@ -11,8 +11,6 @@ services:
   hcm-backend:
     build:
       context: .
-      args:
-        SERVER: production
     ports:
       - "3000:3001"
     command: npm start
