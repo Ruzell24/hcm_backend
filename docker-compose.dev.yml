@@ -3,8 +3,6 @@ services:
   hcm-backend:
     build:
       context: .
-      args:
-        SERVER: development
     ports:
         - "3000:3000"
     volumes:
